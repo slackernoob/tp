@@ -1,6 +1,8 @@
 package seedu.vms.logic.parser.patient;
 
 import static seedu.vms.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.vms.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.vms.logic.parser.CliSyntax.PREFIX_REMARK;
 
 import seedu.vms.logic.commands.Command;
 import seedu.vms.logic.commands.patient.AddCommand;
@@ -9,7 +11,9 @@ import seedu.vms.logic.commands.patient.DeleteCommand;
 import seedu.vms.logic.commands.patient.EditCommand;
 import seedu.vms.logic.commands.patient.FindCommand;
 import seedu.vms.logic.commands.patient.ListCommand;
+import seedu.vms.logic.commands.RemarkCommand;
 import seedu.vms.logic.parser.FeatureParser;
+import seedu.vms.logic.parser.RemarkCommandParser;
 import seedu.vms.logic.parser.exceptions.ParseException;
 
 /**
@@ -41,6 +45,9 @@ public class PatientParser extends FeatureParser {
 
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
+
+        case RemarkCommand.COMMAND_WORD:
+            return new RemarkCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

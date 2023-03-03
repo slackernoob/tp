@@ -27,6 +27,7 @@ import seedu.vms.model.person.Email;
 import seedu.vms.model.person.Name;
 import seedu.vms.model.person.Person;
 import seedu.vms.model.person.Phone;
+import seedu.vms.model.person.Remark;
 import seedu.vms.model.tag.Tag;
 
 /**
@@ -96,9 +97,10 @@ public class EditCommand extends Command {
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
+        Remark updatedRemark = personToEdit.getRemark();
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedRemark, updatedTags);
     }
 
     @Override

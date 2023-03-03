@@ -21,7 +21,7 @@ public class ArgumentTokenizer {
      *
      * @throws ParseException if a flag name is blank.
      */
-    public static ArgumentMultimap tokenize(String argString) throws ParseException {
+    public static ArgumentMultimap tokenize(String argString, Prefix... prefixes) throws ParseException {
         argString = argString.strip() + " ";
 
         ArgumentMultimap argMap = new ArgumentMultimap();
