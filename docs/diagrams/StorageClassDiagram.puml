@@ -14,12 +14,33 @@ Class JsonUserPrefsStorage
 Class "<<interface>>\nStorage" as Storage
 Class StorageManager
 
-package "Vms Storage" #F4F6F6{
-Class "<<interface>>\nVmsStorage" as VmsStorage
-Class JsonVmsStorage
-Class JsonSerializableVms
+package "PatientManager Storage" #F4F6F6{
+Class "<<interface>>\nPatientManagerStorage" as PatientManagerStorage
+Class JsonPatientManagerStorage
+Class JsonSerializablePatientManager
 Class JsonAdaptedPatient
-Class JsonAdaptedTag
+Class JsonAdaptedPatientData
+}
+
+package "Appointment Storage" #F4F6F6{
+Class "<<interface>>\nAppointmentStorage" as AppointmentStorage
+Class JsonAppointmentStorage
+Class JsonSerializableAppointmentManager
+Class JsonAdaptedAppointment
+Class JsonAdaptedAppointmentData
+}
+
+package "Keyword Storage" #F4F6F6{
+Class "<<interface>>\nKeywordStorage" as KeywordStorage
+Class JsonKeywordStorage
+Class JsonAdaptedKeyword
+}
+
+package "VaxType Storage" #F4F6F6{
+Class "<<interface>>\nVaxTypeStorage" as VaxTypeStorage
+Class JsonVaxTypeStorage
+Class JsonAdaptedVaxType
+Class JsonAdaptedVaxRequirement
 }
 
 }
@@ -29,15 +50,34 @@ HiddenOutside ..> Storage
 
 StorageManager .up.|> Storage
 StorageManager -up-> "1" UserPrefsStorage
-StorageManager -up-> "1" VmsStorage
+StorageManager -up-> "1" PatientManagerStorage
+StorageManager -up-> "1" AppointmentStorage
+StorageManager -up-> "1" KeywordStorage
+StorageManager -up-> "1" VaxTypeStorage
 
 Storage -left-|> UserPrefsStorage
-Storage -right-|> VmsStorage
+Storage -right-|> PatientManagerStorage
+Storage -down-|> AppointmentStorage
+Storage -down-|> KeywordStorage
+Storage -down-|> VaxTypeStorage
 
 JsonUserPrefsStorage .up.|> UserPrefsStorage
-JsonVmsStorage .up.|> VmsStorage
-JsonVmsStorage ..> JsonSerializableVms
-JsonSerializableVms --> "*" JsonAdaptedPatient
-JsonAdaptedPatient --> "*" JsonAdaptedTag
+JsonPatientManagerStorage .up.|> PatientManagerStorage
+JsonAppointmentStorage .up.|> AppointmentStorage
+JsonKeywordStorage .up.|> KeywordStorage
+JsonVaxTypeStorage .up.|> VaxTypeStorage
+
+JsonPatientManagerStorage ..> JsonSerializablePatientManager
+JsonSerializablePatientManager --> "*" JsonAdaptedPatient
+JsonAdaptedPatient --> "*" JsonAdaptedPatientData
+
+JsonAppointmentStorage ..> JsonSerializableAppointmentManager
+JsonSerializableAppointmentManager --> "*" JsonAdaptedAppointment
+JsonAdaptedAppointment --> "*" JsonAdaptedAppointmentData
+
+JsonKeywordStorage ..> JsonAdaptedKeyword
+
+JsonVaxTypeStorage ..> JsonAdaptedVaxType
+JsonVaxTypeStorage ..> JsonAdaptedVaxRequirement
 
 @enduml
